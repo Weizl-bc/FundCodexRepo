@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.wzl.funddatamanager.mapper.FundNavSnapshotMapper">
+
+    <resultMap id="BaseResultMap" type="org.wzl.funddatamanager.domain.FundNavSnapshot">
+            <id property="id" column="id" />
+            <result property="fundCode" column="fund_code" />
+            <result property="tradeDate" column="trade_date" />
+            <result property="nav" column="nav" />
+            <result property="accumNav" column="accum_nav" />
+            <result property="dailyGrowthRate" column="daily_growth_rate" />
+            <result property="dailyProfitPer10k" column="daily_profit_per_10k" />
+            <result property="estNav" column="est_nav" />
+            <result property="estGrowthRate" column="est_growth_rate" />
+            <result property="source" column="source" />
+            <result property="sourceUpdatedAt" column="source_updated_at" />
+            <result property="createdAt" column="created_at" />
+            <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,fund_code,trade_date,nav,accum_nav,daily_growth_rate,
+        daily_profit_per_10k,est_nav,est_growth_rate,source,source_updated_at,
+        created_at,updated_at
+    </sql>
+</mapper>

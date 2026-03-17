@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.wzl.funddatamanager.mapper.FundNavHistoryMapper">
+
+    <resultMap id="BaseResultMap" type="org.wzl.funddatamanager.domain.FundNavHistory">
+            <id property="id" column="id" />
+            <result property="fundCode" column="fund_code" />
+            <result property="statDate" column="stat_date" />
+            <result property="nav" column="nav" />
+            <result property="accumNav" column="accum_nav" />
+            <result property="growthRate" column="growth_rate" />
+            <result property="createdAt" column="created_at" />
+            <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,fund_code,stat_date,nav,accum_nav,growth_rate,
+        created_at,updated_at
+    </sql>
+</mapper>

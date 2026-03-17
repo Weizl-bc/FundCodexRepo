@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.wzl.funddatamanager.mapper.FundTopHoldingMapper">
+
+    <resultMap id="BaseResultMap" type="org.wzl.funddatamanager.domain.FundTopHolding">
+            <id property="id" column="id" />
+            <result property="fundCode" column="fund_code" />
+            <result property="reportDate" column="report_date" />
+            <result property="stockCode" column="stock_code" />
+            <result property="stockName" column="stock_name" />
+            <result property="holdingRatio" column="holding_ratio" />
+            <result property="holdingMarketValue" column="holding_market_value" />
+            <result property="sortNo" column="sort_no" />
+            <result property="createdAt" column="created_at" />
+            <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,fund_code,report_date,stock_code,stock_name,holding_ratio,
+        holding_market_value,sort_no,created_at,updated_at
+    </sql>
+</mapper>
