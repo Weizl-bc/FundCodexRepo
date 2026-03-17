@@ -7,6 +7,7 @@ def calculate_momentum_factor(df):
         etf基金：ak.fund_etf_hist_em(fund="017641",indicator="单位净值走势")
     :return: 分数，满分100分
     """
+    df = df.copy()
     df["momentum_5"] = df["单位净值"].pct_change(5)
 
     m = df.iloc[-1]["momentum_5"]

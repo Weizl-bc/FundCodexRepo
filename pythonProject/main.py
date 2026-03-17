@@ -1,15 +1,23 @@
 import akshare as ak
 
+from factor.capital_flow_factor import fund_capital_flow_score
+from factor.technology_trends.ma_factor import calculate_ma_factor
+from factor.technology_trends.macd_factor import calculate_macd_factor
 from factor.technology_trends.momentum_factor import calculate_momentum_factor
+from factor.technology_trends.rsi_factor import calculate_rsi_factor
+from factor.technology_trends.volume_factor import calculate_volume_factor
 from utils.date_util import get_last_year_date
-from utils.fund_util import is_etf_fund
+from utils.fund_util import is_etf_related_fund, is_pure_etf_fund, get_fund_row
 
-fund_code = "019498"
-etf_fund = False
+fund_code = "016185"
+pure_etf_fund = is_pure_etf_fund(fund_code)
+etf_related_fund = is_etf_related_fund(fund_code)
 
-etf_fund = is_etf_fund(fund_code)
+print("fund name", get_fund_row(fund_code))
+print("pure_etf_fund", pure_etf_fund)
+print("etf_related_fund", etf_related_fund)
 
-if etf_fund:
+if pure_etf_fund:
     df = ak.fund_etf_hist_em(
         symbol=fund_code,
         period="daily",
@@ -23,5 +31,17 @@ else:
         period="3年"
     )
 
+momentum_factor_score = calculate_momentum_factor(df)
+ma_factor_score = calculate_ma_factor(df)
+rsi_factor_score = calculate_rsi_factor(df)
+macd_factor_score = calculate_macd_factor(df)
+volume_factor_score = calculate_volume_factor(df)
+capital_flow_score = fund_capital_flow_score(fund_code)["detail"]["scale_score"]
+
 print(df.head())
-print(calculate_momentum_factor(df))
+print("momentum_factor", momentum_factor_score)
+print("ma_factor", ma_factor_score)
+print("rsi_factor", rsi_factor_score)
+print("macd_factor", macd_factor_score)
+print("volume_factor", volume_factor_score)
+print("capital_flow_score", capital_flow_score)
