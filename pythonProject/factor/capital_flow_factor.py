@@ -4,6 +4,8 @@ from typing import Optional, Dict, Any
 import akshare as ak
 import pandas as pd
 
+from utils.fund_util import get_fund_type_label
+
 
 def _safe_float(value, default=0.0) -> float:
     """安全转 float"""
@@ -54,31 +56,13 @@ def _clip_score(score: float) -> int:
 
 def _get_fund_type(code: str) -> str:
     """
-    尽量根据 fund_name_em 判断基金类型
-    返回: ETF / OPEN / UNKNOWN
+    统一通过 fund_util 判断基金类型。
+
+    返回值只保留业务层需要的两类：
+    - ETF: 场内纯 ETF
+    - OPEN: 普通开放式基金或 ETF 联接基金
     """
-    all_funds = ak.fund_name_em()
-    all_funds["基金代码"] = all_funds["基金代码"].astype(str).str.zfill(6)
-
-    row = all_funds.loc[all_funds["基金代码"] == str(code).zfill(6)]
-    if row.empty:
-        # 兜底：很多场内基金代码以 5/1 开头，但不是绝对规则
-        code_str = str(code).zfill(6)
-        if code_str.startswith(("5", "1")):
-            return "ETF"
-        return "OPEN"
-
-    fund_type = str(row.iloc[0]["基金类型"]).upper()
-    fund_name = str(row.iloc[0]["基金简称"]).upper()
-
-    # ETF 联接基金属于开放式基金，不能直接按场内 ETF 行情接口处理
-    is_etf_linked = "联接" in fund_name or "ETF联接" in fund_type
-    is_pure_etf = "ETF" in fund_name and not is_etf_linked
-
-    if is_pure_etf:
-        return "ETF"
-
-    return "OPEN"
+    return get_fund_type_label(code)
 
 
 def _score_by_thresholds(value: float, thresholds: list[tuple[float, int]]) -> int:

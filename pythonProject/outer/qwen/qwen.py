@@ -85,7 +85,3 @@ def _read_api_key_from_env_file() -> str:
 
     return ""
 
-
-if __name__ == "__main__":
-    demo_prompt = "我现在要"
-    print(call_qwen(demo_prompt))
